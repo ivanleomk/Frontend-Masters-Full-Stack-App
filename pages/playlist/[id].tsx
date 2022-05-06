@@ -3,7 +3,6 @@ import GradientLayout from "../../components/gradientLayout";
 import SongsTable from "../../components/songsTable";
 import { validateToken } from "../../lib/auth";
 import prisma from "../../lib/prisma";
-import playlist from "../api/playlist";
 
 const getBgColor = (id) => {
   const colors = ["red", "green", "blue", "orange", "purple", "teal", "yellow"];
@@ -15,9 +14,9 @@ const Playlist = ({ playlist }) => {
   const color = getBgColor(playlist.id);
   return (
     <GradientLayout
-      roundImage={false}
+      round={false}
       title={playlist.name}
-      substitle="playlist"
+      subtitle="playlist"
       color={color}
       description={`${playlist.songs.length} songs`}
       image={`https://picsum.photos/400?random=${playlist.id}`}

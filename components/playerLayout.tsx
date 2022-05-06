@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@chakra-ui/layout";
 import Sidebar from "./sidebar";
-import PlayerBar from "../pages/playerbar";
+import PlayerBar from "./playerBar";
 
 const PlayerLayout = ({ children }) => {
   return (

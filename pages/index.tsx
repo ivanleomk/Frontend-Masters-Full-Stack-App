@@ -5,11 +5,11 @@ import { useMe } from "../lib/hooks";
 import prisma from "../lib/prisma";
 
 const Home = ({ artists }) => {
-  const { user, isLoading } = useMe();
-  console.log(user);
+  const { user } = useMe();
 
   return (
     <GradientLayout
+      round
       color="purple"
       subtitle="Profile"
       title={`${user?.firstName} ${user?.lastName}`}

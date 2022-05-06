@@ -1,4 +1,3 @@
-import { True } from "./../../node_modules/.prisma/client/index.d";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cookie from "cookie";

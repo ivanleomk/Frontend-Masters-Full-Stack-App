@@ -1,3 +1,4 @@
+import { useStoreActions } from "easy-peasy";
 import {
   ButtonGroup,
   Box,
@@ -18,15 +19,15 @@ import {
   MdSkipNext,
   MdOutlinePlayCircleFilled,
   MdOutlinePauseCircleFilled,
-  MdOutlineRepeat,
   MdRepeat,
 } from "react-icons/md";
 import { formatTime } from "../lib/formatters";
-import { useStoreActions } from "easy-peasy";
 
 const Player = ({ songs, activeSong }) => {
   const [playing, setPlaying] = useState(true);
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(
+    songs.findIndex((s) => s.id === activeSong.id)
+  );
   const [seek, setSeek] = useState(0.0);
   const [isSeeking, setIsSeeking] = useState(false);
   const [repeat, setRepeat] = useState(false);
@@ -57,10 +58,13 @@ const Player = ({ songs, activeSong }) => {
     setIndex((state) => {
       if (shuffle) {
         const next = Math.floor(Math.random() * songs.length);
+
         if (next === state) {
           return nextSong();
         }
+        return next;
       }
+
       return state === songs.length - 1 ? 0 : state + 1;
     });
   };
@@ -103,7 +107,6 @@ const Player = ({ songs, activeSong }) => {
   }, [playing, isSeeking]);
 
   useEffect(() => {
-    console.log(`index is ${index}`);
     setActiveSong(songs[index]);
   }, [index, setActiveSong, songs]);
 
@@ -184,10 +187,9 @@ const Player = ({ songs, activeSong }) => {
           </Box>
           <Box width="80%">
             <RangeSlider
-              aria-label={["min", "max"]}
               step={0.1}
               min={0}
-              max={duration ? duration.toFixed(2) : 0}
+              max={duration ? (duration.toFixed(2) as unknown as number) : 0}
               onChange={onSeek}
               value={[seek]}
               onChangeStart={() => setIsSeeking(true)}

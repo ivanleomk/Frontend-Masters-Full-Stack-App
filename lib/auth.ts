@@ -1,5 +1,4 @@
-import { NextApiResponse } from "next";
-import { NextApiRequest } from "next";
+import { NextApiResponse, NextApiRequest } from "next";
 import jwt from "jsonwebtoken";
 import prisma from "./prisma";
 
